@@ -1,0 +1,92 @@
+html { min-height: 100%; }
+
+body { width: 100%; margin: 0; font-family: Oswald, san-serif; overflow-x: hidden; }
+
+h1, h2, h3, h4, h5, h6 { margin-top: 0; font-family: Bangers, san-serif; font-weight: 400; line-height: 1.25; }
+
+h1 { font-size: 48px; }
+h2 { font-size: 34px; margin-bottom: 20px; }
+
+div { box-sizing: border-box; }
+a { box-sizing: border-box; cursor: pointer; user-select: none; }
+
+.loading { min-width: 1024px; position: absolute; left: 0; width: 100%; height: 100%; background: #fff; z-index: 2; }
+
+.step { display: none; min-width: 1024px; min-height: 650px; position: absolute; left: 0; width: 100%; height: 100%; z-index: -1; transition: 1s; overflow: hidden; }
+.step.active { display: block; z-index: 1; overflow: auto; }
+
+.start .background { position: absolute; width: 100%; height: 100%; background-repeat: no-repeat; background-size: cover; background-position: center center; overflow: hidden; }
+.start .background-layer-01 { background-image: url('../images/background-layer-01.png'); }
+.start .background-layer-02 img { position: absolute; top: -100%; right: -100%; bottom: -100%; left: -100%; margin: auto; width: 150%; animation: spin 18s infinite linear; }
+.start .background-layer-03 { background-image: url('../images/background-layer-03.png'); }
+.start .background-layer-04 { background-image: url('../images/background-layer-04.png'); }
+.start .background-layer-04 .start-menu { position: absolute; top: 0; left: 0; right: 0; margin: auto; width: 22%; min-width: 300px; height: 100%; }
+.start .background-layer-04 .start-button {
+  position: absolute; left: 0; bottom: 31%; width: 100%;
+  margin: auto; padding: 8px 0;
+  font-family: Bangers, san-serif; font-size: 36px; line-height: 1.5; text-align: center; color: #fff; white-space: nowrap;
+  background-color: #faaa41;
+  border-bottom: 12px solid #df8a41; border-radius: 12px;
+  transition: 200ms;
+}
+.start .background-layer-04 .start-button:hover { border-bottom-width: 8px; }
+.start .background-layer-04 .start-button:active { border-bottom-width: 0; }
+
+@media screen and (max-height: 900px) {
+  .start .background-layer-04 .start-button { bottom: 30%; }
+}
+
+@media screen and (max-height: 700px) {
+  .start .background-layer-04 .start-button { bottom: 28%; }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.customize .canvas { display: table; width: 100%; height: 100%;  }
+.customize .canvas-main { display: table-cell; text-align: center; vertical-align: middle; background-color: #ffe7d1; }
+.customize .canvas-menu { display: table-cell; width: 25%; min-width: 500px; height: 100%; padding: 30px; border-left: 20px solid #000; background-color: #fff; }
+
+.patch-background { padding: 60px 0; background-color: #fff; }
+
+.patch { position: relative; padding: 80px 0; z-index: 0; }
+.patch .patch-background { position: absolute; top: 0; left: 0; right: 0; width: 80%; max-width: 800px; height: 100%; margin: auto; background-color: #fff; z-index: -1; border-radius: 20px; border: 10px solid rgba(0, 0, 0, 0.05); }
+.patch svg { width: 60%; max-width: 500px; height: auto; cursor: pointer; }
+.patch svg path, .patch svg g { transition: 200ms; transition-timing-function: ease-in-out; }
+.patch svg path:hover, .patch svg g:hover { opacity: 0.5; }
+
+.color-palette { max-width: 420px; margin: 0 0 20px 0; overflow: hidden; }
+.color-palette a { display: block; float: left; width: 60px; height: 60px; margin: 0 16px 16px 0; border-radius: 40px; border: 8px solid #000; }
+
+.color-palette.shape .color-1 { background-color: #f5ea14; }
+.color-palette.shape .color-2 { background-color: #69bc45; }
+.color-palette.shape .color-3 { background-color: #49c7ef; }
+.color-palette.shape .color-4 { background-color: #f287b0; }
+.color-palette.shape .color-5 { background-color: #faaa41; }
+.color-palette.shape .color-6 { background-color: #d760a3; }
+.color-palette.shape .color-7 { background-color: #4f6ab1; }
+.color-palette.shape .color-8 { background-color: #b7b9bb; }
+.color-palette.shape .color-9 { background-color: #231f20; }
+.color-palette.shape .color-10 { background-color: #ffffff; }
+.color-palette.shape .color-11 { background-color: #dfcba7; }
+.color-palette.shape .color-12 { background-color: #f5aac2; }
+.color-palette.shape .color-13 { background-color: #a99ecd; }
+.color-palette.shape .color-14 { background-color: #a3d39d; }
+.color-palette.shape .color-15 { background-color: #f6945f; }
+.color-palette.shape .color-16 { background-color: #3fabc1; }
+.color-palette.shape .color-17 { background-color: #ce7cb2; }
+.color-palette.shape .color-18 { background-color: #ef5c88; }
+.color-palette.shape .color-19 { background-color: #5650a1; }
+.color-palette.shape .color-20 { background-color: #51b748; }
+
+.color-palette.background .color-1 { background-color: #fff; }
+.color-palette.background .color-2 { background-color: #999; }
+.color-palette.background .color-3 { background-color: #000; }
+
+.color-palette.skin .color-1 { background-color: #ffe7d1; }
+.color-palette.skin .color-2 { background-color: #e6bc98; }
+.color-palette.skin .color-3 { background-color: #d4aa78; }
+.color-palette.skin .color-4 { background-color: #a16e4b; }
+.color-palette.skin .color-5 { background-color: #3b2219; }
