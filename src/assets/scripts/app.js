@@ -1,25 +1,31 @@
 $(document).ready(function() {
 
-  var currentSVG;
   var currentSVGElement;
 
   $('.loading').remove();
 
-  $('.start-button').on('click', function() {
-    var step = $(this).parents('.step');
+  $('.button.confirm').on('click', function() {
+    if (!$(this).hasClass('disabled')){
+      var step = $(this).parents('.step');
 
-    step.css('left', '-100%');
-    step.next('.step').show();
+      step.css('left', '-100%');
+      step.next('.step').show();
 
-    setTimeout(function() {
-      step.removeClass('active');
-      step.next('.step').addClass('active').removeAttr('style');
-    }, 1000);
+      setTimeout(function() {
+        step.removeClass('active');
+        step.next('.step').addClass('active').removeAttr('style');
+      }, 1000);
+    }
+  });
+
+  $('.gallery a').on('click', function() {
+    $(this).addClass('active');
+    $(this).siblings().removeClass('active');
+    $(this).parents('.step').find($('.button.confirm')).removeClass('disabled');
   });
 
   $('.patch').on('click', 'path, g', function() {
     currentSVGElement = $(this).attr('id');
-    console.log(currentSVGElement);
   });
 
   $('.color-palette.shape').on('click', '.color', function() {
@@ -33,7 +39,7 @@ $(document).ready(function() {
   });
 
   $('.color-palette.skin').on('click', '.color', function() {
-    $('.canvas-main').css('background-color', $(this).css('background-color'));
+    $('.canvas .main').css('background-color', $(this).css('background-color'));
   });
 
 });

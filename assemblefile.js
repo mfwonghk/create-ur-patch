@@ -12,8 +12,9 @@ const eol = require('gulp-eol');
 const newline = require("gulp-convert-newline");
 
 const html = require('gulp-htmlmin');
-const img = require('gulp-imagemin');
 const css = require('gulp-clean-css');
+const js = require('gulp-uglify');
+const img = require('gulp-imagemin');
 
 const del = require('del');
 const plumber = require('gulp-plumber');
@@ -51,7 +52,7 @@ app.task('build:style', function() {
     .pipe(cache('build:style'))
     .pipe(app.dest('docs/assets/styles/scss'))
     .pipe(sourcemaps.init())
-    .pipe(sass())
+    .pipe(sass().on('error', sass.logError))
     .pipe(css())
     .pipe(newline({ newline: 'crlf' }))
     .pipe(rename({suffix: '.min'}))
@@ -73,6 +74,7 @@ app.task('build:scripts', function() {
   return app.src('src/assets/scripts/*.js')
     .pipe(plumber())
     .pipe(cache('build:scripts'))
+    .pipe(js())
     .pipe(eol('\r\n'))
     .pipe(newline({ newline: 'crlf' }))
     .pipe(rename({suffix: '.min'}))
@@ -83,6 +85,7 @@ app.task('build:images', function() {
   return app.src(['src/assets/images/*.png', 'src/assets/images/*.svg'])
     .pipe(plumber())
     .pipe(cache('build:images'))
+    .pipe(img())
     .pipe(app.dest('docs/assets/images'));
 });
 
@@ -93,7 +96,7 @@ app.task('build:remove', function() {
 app.task('build', ['build:remove', 'build:pages', 'build:style', 'build:plugins', 'build:scripts', 'build:images']);
 
 app.task('watch', function() {
-  app.watch(['./src/layouts/*.hbs', './src/partials/*.hbs', './src/pages/*.hbs'], 'build:pages');
+  app.watch(['./src/layouts/*.hbs', './src/partials/*.svg', './src/pages/*.hbs'], 'build:pages');
   app.watch('src/assets/styles/*.scss', 'build:style');
   app.watch('src/assets/plugins/*.js', 'build:plugins');
   app.watch('src/assets/scripts/*.js', 'build:scripts');
