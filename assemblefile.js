@@ -26,15 +26,15 @@ cache.caches = {};
 
 app.use(watch());
 
-app.option('layout', 'default');
+app.option('layout', 'app');
 
-app.task('dist:pages:load', function*() {
-  app.layouts('./src/layouts/*.hbs');
-  app.partials('./src/partials/*.svg');
-  app.pages('./src/pages/*.hbs');
+app.task('build:pages:load', function*() {
+  app.layouts('src/layouts/*.hbs');
+  app.partials('src/partials/*.svg');
+  app.pages('src/pages/*.hbs');
 });
 
-app.task('dist:pages', 'dist:pages:load', function() {
+app.task('build:pages', 'build:pages:load', function() {
   return app.toStream('pages')
     .pipe(app.renderFile())
     .pipe(html({ collapseWhitespace: true, collapseInlineTagWhitespace: true, keepClosingSlash: true }))
@@ -42,14 +42,14 @@ app.task('dist:pages', 'dist:pages:load', function() {
     .pipe(eol('\r\n'))
     .pipe(newline({ newline: 'crlf' }))
     .pipe(rename({extname: '.html'}))
-    .pipe(app.dest('dist'));
+    .pipe(app.dest('docs'));
 });
 
-app.task('dist:style', function() {
+app.task('build:style', function() {
   return app.src('src/assets/styles/*.scss')
     .pipe(plumber())
-    .pipe(cache('dist:style'))
-    .pipe(app.dest('./dist/assets/styles/scss'))
+    .pipe(cache('build:style'))
+    .pipe(app.dest('docs/assets/styles/scss'))
     .pipe(sourcemaps.init())
     .pipe(sass())
     .pipe(css())
@@ -57,47 +57,47 @@ app.task('dist:style', function() {
     .pipe(rename({suffix: '.min'}))
     .pipe(sourcemaps.write('.', { includeContent: false, sourceRoot: 'scss' }))
     .pipe(eol('\r\n'))
-    .pipe(app.dest('./dist/assets/styles'));
+    .pipe(app.dest('docs/assets/styles'));
 });
 
-app.task('dist:plugins', function() {
+app.task('build:plugins', function() {
   return app.src('src/assets/plugins/*.js')
     .pipe(plumber())
-    .pipe(cache('dist:plugins'))
+    .pipe(cache('build:plugins'))
     .pipe(eol('\r\n'))
     .pipe(newline({ newline: 'crlf' }))
-    .pipe(app.dest('./dist/assets/plugins'));
+    .pipe(app.dest('docs/assets/plugins'));
 });
 
-app.task('dist:scripts', function() {
+app.task('build:scripts', function() {
   return app.src('src/assets/scripts/*.js')
     .pipe(plumber())
-    .pipe(cache('dist:scripts'))
+    .pipe(cache('build:scripts'))
     .pipe(eol('\r\n'))
     .pipe(newline({ newline: 'crlf' }))
     .pipe(rename({suffix: '.min'}))
-    .pipe(app.dest('./dist/assets/scripts'));
+    .pipe(app.dest('docs/assets/scripts'));
 });
 
-app.task('dist:images', function() {
+app.task('build:images', function() {
   return app.src(['src/assets/images/*.png', 'src/assets/images/*.svg'])
     .pipe(plumber())
-    .pipe(cache('dist:images'))
-    .pipe(app.dest('./dist/assets/images'));
+    .pipe(cache('build:images'))
+    .pipe(app.dest('docs/assets/images'));
 });
 
-app.task('dist:remove', function() {
-  return del('dist/*');
+app.task('build:remove', function() {
+  return del('build/*');
 });
 
-app.task('dist', ['dist:remove', 'dist:pages', 'dist:style', 'dist:plugins', 'dist:scripts', 'dist:images']);
+app.task('build', ['build:remove', 'build:pages', 'build:style', 'build:plugins', 'build:scripts', 'build:images']);
 
 app.task('watch', function() {
-  app.watch(['./src/layouts/*.hbs', './src/partials/*.hbs', './src/pages/*.hbs'], 'dist:pages');
-  app.watch('src/assets/styles/*.scss', 'dist:style');
-  app.watch('src/assets/plugins/*.js', 'dist:plugins');
-  app.watch('src/assets/scripts/*.js', 'dist:scripts');
-  app.watch(['src/assets/images/*.png', 'src/assets/images/*.svg'], 'dist:images');
+  app.watch(['./src/layouts/*.hbs', './src/partials/*.hbs', './src/pages/*.hbs'], 'build:pages');
+  app.watch('src/assets/styles/*.scss', 'build:style');
+  app.watch('src/assets/plugins/*.js', 'build:plugins');
+  app.watch('src/assets/scripts/*.js', 'build:scripts');
+  app.watch(['src/assets/images/*.png', 'src/assets/images/*.svg'], 'build:images');
 });
 
 app.task('default', 'watch');
