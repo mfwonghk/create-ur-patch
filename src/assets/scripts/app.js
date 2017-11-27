@@ -12,10 +12,22 @@ $(document).ready(function() {
       step.next('.step').show();
 
       setTimeout(function() {
-        step.removeClass('active');
+        step.removeClass('active').removeAttr('style');
         step.next('.step').addClass('active').removeAttr('style');
       }, 1000);
     }
+  });
+
+  $('.back').on('click', function() {
+    var step = $(this).parents('.step');
+
+    step.css('left', '100%');
+    step.prev('.step').show().css('left', '0');
+
+    setTimeout(function() {
+      step.removeClass('active').removeAttr('style');
+      step.prev('.step').addClass('active').removeAttr('style');
+    }, 1000);
   });
 
   $('.gallery a').on('click', function() {
