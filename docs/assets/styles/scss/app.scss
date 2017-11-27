@@ -8,15 +8,29 @@ h1 { font-size: 48px; margin-bottom: 20px; }
 h2 { font-size: 34px; margin-bottom: 20px; }
 
 div { box-sizing: border-box; }
-a { box-sizing: border-box; cursor: pointer; user-select: none; }
+a { box-sizing: border-box; cursor: pointer; user-select: none; outline: 0; -webkit-tap-highlight-color: rgba(0, 0, 0, 0); }
+
+input { outline: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  &::-ms-clear { display: none; }
+}
+
+::-webkit-scrollbar { width: 14px; height: 14px; }
+::-webkit-scrollbar-button { width: 0; height: 0; }
+::-webkit-scrollbar-thumb { background-color: rgba(0, 0, 0, 0.15); border-radius: 7px; }
+::-webkit-scrollbar-thumb:hover { background-color: rgba(0, 0, 0, 0.15); }
+::-webkit-scrollbar-thumb:active { background-color: rgba(0, 0, 0, 0.15); }
+::-webkit-scrollbar-track { background-color: transparent; border-radius: 7px; }
+::-webkit-scrollbar-track:hover { background-color: transparent; }
+::-webkit-scrollbar-track:active { background-color: transparent; }
+::-webkit-scrollbar-corner { background: transparent; }
 
 .loading { min-width: 1024px; position: absolute; left: 0; width: 100%; height: 100%; background: #fff; z-index: 2; }
 
 .button { position: relative; display: inline-block; transition: 200ms; z-index: 0;
-  &:after { content: ""; position: absolute; bottom: -12px; left: 0; width: 100%; height: 50px; border-radius: 12px; background-color: #df8a41; transition: 200ms; }
+  &:after { content: ""; position: absolute; bottom: -12px; left: 0; width: 100%; height: 50px; border-radius: 12px; transition: 200ms; }
   &:active span { top: 12px; }
   &.confirm {
-    span { background-color: #faaa41; }
+    &:after { background-color: darken(#faaa41, 20%); }
     &:hover span { background-color: lighten(#faaa41, 5%); }
     &.disabled { cursor: not-allowed;
       span { background-color: lighten(grayscale(#faaa41), 15%); }
@@ -24,6 +38,17 @@ a { box-sizing: border-box; cursor: pointer; user-select: none; }
       &:hover span { background-color: lighten(grayscale(#faaa41), 15%); }
       &:active span { top: 0; }
     }
+    span { background-color: #faaa41; }
+  }
+  &.print {
+    &:after { background-color: darken(#69bc45, 20%); }
+    &:hover span { background-color: lighten(#69bc45, 5%); }
+    span { background-color: #69bc45; }
+  }
+  &.order {
+    &:after { background-color: darken(#49c7ef, 20%); }
+    &:hover span { background-color: lighten(#49c7ef, 5%); }
+    span { background-color: #49c7ef; }
   }
   span { display: block; position: relative; top: 0; font-family: bangers, sans-serif; line-height: 1.5; text-align: center; color: #fff; letter-spacing: 1px; white-space: nowrap; z-index: 1; transition: 200ms; }
 }
@@ -102,7 +127,7 @@ a { box-sizing: border-box; cursor: pointer; user-select: none; }
       }
     }
   }
-  .color-palette { margin: 0 0 20px 0; overflow: hidden;
+  .color-palette { margin: 0 0 16px 0; overflow: hidden;
     &.shape {
       .color-1 { background-color: #f5ea14; }
       .color-2 { background-color: #69bc45; }
@@ -144,4 +169,19 @@ a { box-sizing: border-box; cursor: pointer; user-select: none; }
   }
 }
 
-.finalize { background-color: #ff8ab4; }
+.finalize { background-color: #ff8ab4;
+  .menu-container { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; margin: auto; padding: 40px; overflow: auto;
+    h1 { text-align: center; }
+    .menu { max-width: 960px; min-width: 600px; margin: auto; padding: 30px 20px; overflow: hidden; border-radius: 20px; background-color: #fff;
+      .option { float: left; width: 50%; padding: 0 20px;
+        h2 { width: 100%; text-align: center; }
+        .illustration { padding: 20px; background-color: #fff; border-radius: 10px;
+          img { width: 100%; height: auto; }
+        }
+        .button { width: 100%; margin: 30px 0;
+          span { padding: 8px 40px; font-size: 30px; border-radius: 12px; }
+        }
+      }
+    }
+  }
+}
