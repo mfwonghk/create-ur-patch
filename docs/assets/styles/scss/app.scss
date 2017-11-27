@@ -14,21 +14,21 @@ input { outline: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(
   &::-ms-clear { display: none; }
 }
 
-::-webkit-scrollbar { width: 14px; height: 14px; }
+::-webkit-scrollbar { width: 12px; height: 12px; }
 ::-webkit-scrollbar-button { width: 0; height: 0; }
-::-webkit-scrollbar-thumb { background-color: rgba(0, 0, 0, 0.15); border-radius: 7px; }
+::-webkit-scrollbar-thumb { background-color: rgba(0, 0, 0, 0.15); border-radius: 6px; }
 ::-webkit-scrollbar-thumb:hover { background-color: rgba(0, 0, 0, 0.15); }
 ::-webkit-scrollbar-thumb:active { background-color: rgba(0, 0, 0, 0.15); }
-::-webkit-scrollbar-track { background-color: transparent; border-radius: 7px; }
+::-webkit-scrollbar-track { background-color: transparent; border-radius: 6px; }
 ::-webkit-scrollbar-track:hover { background-color: transparent; }
 ::-webkit-scrollbar-track:active { background-color: transparent; }
 ::-webkit-scrollbar-corner { background: transparent; }
 
 .loading { min-width: 1024px; position: absolute; left: 0; width: 100%; height: 100%; background: #fff; z-index: 2; }
 
-.button { position: relative; display: inline-block; transition: 200ms; z-index: 0;
-  &:after { content: ""; position: absolute; bottom: -12px; left: 0; width: 100%; height: 50px; border-radius: 12px; transition: 200ms; }
-  &:active span { top: 12px; }
+.button { position: relative; display: inline-block; margin: 0 0 12px 0; transition: background-color 200ms; z-index: 0;
+  &:after { content: ""; position: absolute; bottom: -12px; left: 0; width: 100%; height: 50px; border-radius: 12px; transition: background-color 200ms; }
+  &:active span, & span:active { top: 12px; }
   &.confirm {
     &:after { background-color: darken(#faaa41, 20%); }
     &:hover span { background-color: lighten(#faaa41, 5%); }
@@ -38,7 +38,7 @@ input { outline: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(
       &:hover span { background-color: lighten(grayscale(#faaa41), 15%); }
       &:active span { top: 0; }
     }
-    span { background-color: #faaa41; }
+    span { letter-spacing: 1px; background-color: #faaa41; }
   }
   &.print {
     &:after { background-color: darken(#69bc45, 20%); }
@@ -50,19 +50,15 @@ input { outline: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(
     &:hover span { background-color: lighten(#49c7ef, 5%); }
     span { background-color: #49c7ef; }
   }
-  span { display: block; position: relative; top: 0; font-family: bangers, sans-serif; line-height: 1.5; text-align: center; color: #fff; letter-spacing: 1px; white-space: nowrap; z-index: 1; transition: 200ms; }
+  span { display: block; position: relative; top: 0; font-family: bangers, sans-serif; line-height: 1.5; text-align: center; color: #fff; letter-spacing: 1px; white-space: nowrap; z-index: 1; transition: top 200ms; }
 }
 
-.step { display: none; position: absolute; left: 0; width: 100%; height: 100%; transition: 700ms; overflow: hidden; z-index: -1;
+.step { display: none; position: absolute; left: 0; width: 100%; height: 100%; transition: left 700ms; transform: translateZ(0); overflow: hidden; z-index: -1;
   &.active { display: block; z-index: 1; }
 }
 
 .start { min-width: 320px; min-height: 675px;
-  .background {
-    position: absolute; width: 100%; height: 100%;
-    background-repeat: no-repeat; background-size: cover; background-position: center center;
-    overflow: hidden;
-  }
+  .background { position: absolute; width: 100%; height: 100%; background-repeat: no-repeat; background-size: cover; background-position: center center; overflow: hidden; }
   .background-01 { background-image: url('../images/start-background-01.svg'); }
   .background-02 {
     img { position: absolute; top: -100%; right: -100%; bottom: -100%; left: -100%; margin: auto; width: 150%; animation: spin 18s infinite linear; }
@@ -97,33 +93,36 @@ input { outline: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(
   100% { transform: rotate(360deg); }
 }
 
-.choose { padding: 110px 30px 143px 30px; background-color: #ff8ab4;
-  h1 { position: absolute; top: 30px; left: 30px; }
-  .gallery { height: 100%; padding: 10px; overflow-x: hidden; overflow-y: auto;
-    a { position: relative; display: inline-block; margin: 0 30px 30px 0; padding: 12px; background-color: #fff; border-radius: 20px;
-      &:after { content: ""; position: absolute; top: -10px; left: -10px; width: 100%; height: 100%; padding: 10px; box-sizing: content-box; background-color: transparent; border-radius: 30px; z-index: -1; transition: 100ms; }
+.choose { padding: 112px 0 153px 0; background-color: #fff;
+  h1 { position: absolute; top: 0; left: 0; width: 100%; margin: 0; padding: 16px 30px; color: #fff; border-bottom: 10px solid #000; background-color: #faaa41; }
+  .gallery { height: 100%; padding: 30px 30px 0; border-top: 10px solid #000; border-bottom: 10px solid #000; overflow-x: hidden; overflow-y: auto; background-color: #ff8ab4;
+    a { position: relative; display: block; float: left; margin: 0 30px 30px 0; z-index: 0;
+      &:after { content: ""; position: absolute; top: -10px; left: -10px; width: 100%; height: 100%; padding: 10px; box-sizing: content-box; border-radius: 30px; background-color: transparent; z-index: -1; transition: background-color 100ms; }
       &:hover:after { background-color: #ece400; }
       &.active:after { background-color: #ece400; }
+      img { display: block; padding: 12px; background-color: #fff; border-radius: 20px; }
     }
   }
-  .button.confirm { position: absolute; right: 30px; bottom: 42px;
-    span { padding: 8px 40px; font-size: 30px; border-radius: 12px; }
+  .bottom { position: absolute; bottom: 0; width: 100%; height: 143px; border-top: 10px solid #000; background-color: #74dae6;
+    .button.confirm { position: absolute; right: 30px; bottom: 30px;
+      span { padding: 8px 40px; font-size: 30px; border-radius: 12px; }
+    }
   }
 }
 
 .customize {
   .canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden;
-    .main { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 0 400px 0 0; background-color: #ffe7d1; }
-    .menu { position: absolute; top: 0; right: 0; width: 400px; height: 100%; padding: 30px 15px 30px 30px; border-left: 20px solid #000; background-color: #fff; overflow-x: hidden; overflow-y: auto; }
+    .main { position: absolute; top: 0; left: 0; width: 100%; height: 100%; padding: 0 400px 0 0; background-color: #ffdbac; }
+    .menu { position: absolute; top: 0; right: 0; width: 400px; height: 100%; padding: 30px 15px 30px 30px; border-left: 10px solid #000; background-color: #fff; overflow-x: hidden; overflow-y: auto; }
   }
   .patch-container { height: 100%; overflow: auto;
     .patch { position: relative; height: 100%; min-width: 600px; min-height: 600px; z-index: 0;
       svg { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 70%; min-width: 500px; min-height: 500px; max-width: 700px; max-height: 700px; margin: auto; cursor: pointer; }
-      path, g { transition: 200ms; transition-timing-function: ease-in-out;
+      path, g { transition: opacity 200ms;
         &:hover { opacity: 0.5; }
       }
       .patch-background-container { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; max-width: 900px; max-height: 900px; margin: auto; padding: 20px; z-index: -1;
-        .patch-background { height: 100%; background-color: #fff; border-radius: 20px; border: 10px solid rgba(0, 0, 0, 0.05); }
+        .patch-background { height: 100%; background-color: transparent; border-radius: 20px; transition: background-color 100ms; }
       }
     }
   }
@@ -151,16 +150,15 @@ input { outline: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(
       .color-20 { background-color: #51b748; }
     }
     &.background {
-      .color-1 { background-color: #fff; }
-      .color-2 { background-color: #999; }
-      .color-3 { background-color: #000; }
+      .color-1 { background-color: transparent; background-image: url('../images/patch-background-01.png'); }
+      .color-2 { background-color: #fff; }
     }
     &.skin {
-      .color-1 { background-color: #ffe7d1; }
-      .color-2 { background-color: #e6bc98; }
-      .color-3 { background-color: #d4aa78; }
-      .color-4 { background-color: #a16e4b; }
-      .color-5 { background-color: #3b2219; }
+      .color-1 { background-color: #ffdbac; }
+      .color-2 { background-color: #f1c27d; }
+      .color-3 { background-color: #e0ac69; }
+      .color-4 { background-color: #c68642; }
+      .color-5 { background-color: #8d5524; }
     }
     a { display: block; float: left; width: 60px; height: 60px; margin: 0 16px 16px 0; border-radius: 40px; border: 8px solid #000; }
   }
@@ -170,17 +168,25 @@ input { outline: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(
 }
 
 .finalize { background-color: #ff8ab4;
-  .menu-container { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; margin: auto; padding: 40px; overflow: auto;
-    h1 { text-align: center; }
-    .menu { max-width: 960px; min-width: 600px; margin: auto; padding: 30px 20px; overflow: hidden; border-radius: 20px; background-color: #fff;
+  .background { position: absolute; width: 100%; height: 100%; background-repeat: no-repeat; background-size: cover; background-position: center center; overflow: hidden; }
+  .background-01 { background-image: url('../images/start-background-01.svg'); }
+  .background-02 {
+    img { position: absolute; top: -100%; right: -100%; bottom: -100%; left: -100%; margin: auto; width: 150%; animation: spin 18s infinite linear; }
+  }
+  .background-03 { background-image: url('../images/start-background-03.svg'); }
+  .container { position: absolute; width: 100%; height: 100%; overflow: auto;
+    .menu { position: absolute; top: 0; right: 0; bottom: 0; left: 0; min-width: 600px; max-width: 940px; max-height: 685px; margin: auto; padding: 20px; box-sizing: content-box;
+      h1 { text-align: center; }
+      .block { background-color: #fff; margin: 0 0 20px 0; padding: 40px; border-radius: 20px; overflow: hidden;
       .option { float: left; width: 50%; padding: 0 20px;
         h2 { width: 100%; text-align: center; }
         .illustration { padding: 20px; background-color: #fff; border-radius: 10px;
           img { width: 100%; height: auto; }
         }
-        .button { width: 100%; margin: 30px 0;
+        .button { width: 100%; margin: 30px 0 12px 0;
           span { padding: 8px 40px; font-size: 30px; border-radius: 12px; }
         }
+      }
       }
     }
   }
