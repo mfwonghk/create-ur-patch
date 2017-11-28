@@ -42,7 +42,7 @@ app.task('build:pages', 'build:pages:load', function() {
     .pipe(replace(/\/>/g, ' />'))
     .pipe(eol('\r\n'))
     .pipe(newline({ newline: 'crlf' }))
-    .pipe(rename({extname: '.html'}))
+    .pipe(rename({ extname: '.html' }))
     .pipe(app.dest('docs'));
 });
 
@@ -55,7 +55,7 @@ app.task('build:style', function() {
     .pipe(sass().on('error', sass.logError))
     .pipe(css())
     .pipe(newline({ newline: 'crlf' }))
-    .pipe(rename({suffix: '.min'}))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(sourcemaps.write('.', { includeContent: false, sourceRoot: 'scss' }))
     .pipe(eol('\r\n'))
     .pipe(app.dest('docs/assets/styles'));
@@ -77,7 +77,7 @@ app.task('build:scripts', function() {
     .pipe(js())
     .pipe(eol('\r\n'))
     .pipe(newline({ newline: 'crlf' }))
-    .pipe(rename({suffix: '.min'}))
+    .pipe(rename({ suffix: '.min' }))
     .pipe(app.dest('docs/assets/scripts'));
 });
 
@@ -91,7 +91,7 @@ app.task('build:images', function() {
 
 app.task('build:remove', function() {
   return del('build/*');
-});
+ });
 
 app.task('build', ['build:remove', 'build:pages', 'build:style', 'build:plugins', 'build:scripts', 'build:images']);
 
