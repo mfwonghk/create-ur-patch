@@ -14,10 +14,10 @@
 <div class="step choose">
   <h1>SELECT A DESIGN!</h1>
   <div class="gallery">
-    <a><img src="assets/images/thumbnail-01.png"></a>
-    <a><img src="assets/images/thumbnail-02.png"></a>
-    <a><img src="assets/images/thumbnail-03.png"></a>
-    <a><img src="assets/images/thumbnail-04.png"></a>
+    <a data-patch-shape="patch-shape-01"><img src="assets/images/thumbnail-01.png"></a>
+    <a data-patch-shape="patch-shape-02"><img src="assets/images/thumbnail-02.png"></a>
+    <a data-patch-shape="patch-shape-03"><img src="assets/images/thumbnail-03.png"></a>
+    <a data-patch-shape="patch-shape-04"><img src="assets/images/thumbnail-04.png"></a>
     <a><img src="assets/images/thumbnail-05.png"></a>
     <a><img src="assets/images/thumbnail-06.png"></a>
     <a><img src="assets/images/thumbnail-07.png"></a>
@@ -44,7 +44,18 @@
           <div class="patch-background-container">
             <div class="patch-background"></div>
           </div>
-          {{> patch}}
+          <div class="patch-shape patch-shape-01">
+            {{> patch-shape-01}}
+          </div>
+          <div class="patch-shape patch-shape-02">
+            {{> patch-shape-02}}
+          </div>
+          <div class="patch-shape patch-shape-03">
+            {{> patch-shape-03}}
+          </div>
+          <div class="patch-shape patch-shape-04">
+            {{> patch-shape-04}}
+          </div>
         </div>
       </div>
     </div>

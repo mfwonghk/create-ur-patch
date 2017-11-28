@@ -1,5 +1,6 @@
 $(document).ready(function() {
 
+  var currentSVG;
   var currentSVGElement;
 
   $('.loading').remove();
@@ -31,6 +32,11 @@ $(document).ready(function() {
   });
 
   $('.gallery a').on('click', function() {
+    currentSVG = $(this).attr('data-patch-shape');
+
+    $('.patch .patch-shape').not('.patch .' + currentSVG).hide();
+    $('.patch .' + currentSVG).show();
+
     $(this).addClass('active');
     $(this).siblings().removeClass('active');
     $(this).parents('.step').find($('.button.confirm')).removeClass('disabled');
