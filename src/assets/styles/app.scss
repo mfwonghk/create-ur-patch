@@ -28,8 +28,8 @@ input { outline: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(
 
 .loading { min-width: 1024px; position: absolute; left: 0; width: 100%; height: 100%; background: #fff; z-index: 2; }
 
-.button { position: relative; display: inline-block; margin: 0 0 12px 0; transition: background-color 200ms; z-index: 0;
-  &:after { content: ""; position: absolute; bottom: -12px; left: 0; width: 100%; height: 50px; border-radius: 12px; transition: background-color 200ms; }
+.button { position: relative; display: inline-block; margin: 0 0 12px 0; will-change: background-color; transition: background-color 200ms; z-index: 0;
+  &:after { content: ""; position: absolute; bottom: -12px; left: 0; width: 100%; height: 50px; border-radius: 12px; will-change: background-color; transition: background-color 200ms; }
   &:active span, & span:active { top: 12px; }
   &.confirm {
     &:after { background-color: darken(#faaa41, 20%); }
@@ -52,7 +52,7 @@ input { outline: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(
     &:hover span { background-color: lighten(#49c7ef, 5%); }
     span { background-color: #49c7ef; }
   }
-  span { display: block; position: relative; top: 0; font-family: bangers, sans-serif; line-height: 1.5; text-align: center; color: #fff; letter-spacing: 1px; white-space: nowrap; z-index: 1; transition: top 200ms; }
+  span { display: block; position: relative; top: 0; font-family: bangers, sans-serif; line-height: 1.5; text-align: center; color: #fff; letter-spacing: 1px; white-space: nowrap; z-index: 1; will-change: top; transition: top 200ms; }
 }
 
 .back { display: inline-block; position: relative; padding: 0 20px; font-size: 24px;
@@ -60,7 +60,7 @@ input { outline: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(
  }
 }
 
-.step { display: none; position: absolute; left: 0; width: 100%; height: 100%; transition: left 700ms; overflow: hidden; z-index: -1;
+.step { display: none; position: absolute; left: 0; width: 100%; height: 100%; will-change: left; transition: left 700ms; overflow: hidden; z-index: -1;
   &.active { display: block; z-index: 1; }
 }
 
@@ -104,7 +104,7 @@ input { outline: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(
   h1 { position: absolute; top: 0; left: 0; width: 100%; margin: 0; padding: 16px 30px; color: #fff; border-bottom: 10px solid #000; background-color: #faaa41; }
   .gallery { height: 100%; padding: 30px 30px 0; border-top: 10px solid #000; border-bottom: 10px solid #000; overflow-x: hidden; overflow-y: auto; background-color: #ff8ab4;
     a { position: relative; display: block; float: left; margin: 0 30px 30px 0; z-index: 0;
-      &:after { content: ""; position: absolute; top: -10px; left: -10px; width: 100%; height: 100%; padding: 10px; box-sizing: content-box; border-radius: 30px; background-color: transparent; z-index: -1; transition: background-color 100ms; }
+      &:after { content: ""; position: absolute; top: -10px; left: -10px; width: 100%; height: 100%; padding: 10px; box-sizing: content-box; border-radius: 30px; background-color: transparent; z-index: -1; will-change: background-color; transition: background-color 100ms; }
       &:hover:after { background-color: #ece400; }
       &.active:after { background-color: #ece400; }
       img { display: block; padding: 12px; background-color: #fff; border-radius: 20px; }
@@ -128,11 +128,11 @@ input { outline: 0; -webkit-appearance: none; -webkit-tap-highlight-color: rgba(
   .patch-container { height: 100%; overflow: auto;
     .patch { position: relative; height: 100%; min-width: 600px; min-height: 600px; z-index: 0;
       svg { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 70%; min-width: 500px; min-height: 500px; max-width: 700px; max-height: 700px; margin: auto; cursor: pointer; }
-      path, g { transition: opacity 200ms;
+      path, g { will-change: opacity; transition: opacity 200ms;
         &:hover { opacity: 0.5; }
       }
       .patch-background-container { position: absolute; top: 0; left: 0; bottom: 0; right: 0; width: 100%; height: 100%; max-width: 900px; max-height: 900px; margin: auto; padding: 20px; z-index: -1;
-        .patch-background { height: 100%; background-color: transparent; border-radius: 20px; transition: background-color 100ms; }
+        .patch-background { height: 100%; background-color: transparent; border-radius: 20px; will-change: background-color; transition: background-color 100ms; }
       }
     }
   }
